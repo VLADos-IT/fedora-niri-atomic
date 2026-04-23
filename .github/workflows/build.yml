@@ -1,0 +1,26 @@
+name: Build Fedora Niri Atomic
+on:
+  schedule:
+    - cron: '0 18 * * *'
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  bluebuild:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    steps:
+      - name: Build Custom Image
+        uses: blue-build/github-action@v1
+        with:
+          recipe: 'recipe.yml'
+          cosign_private_key: ${{ secrets.COSIGN_PRIVATE_KEY }}
+          registry_token: ${{ github.token }}
+        env:
+          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+
