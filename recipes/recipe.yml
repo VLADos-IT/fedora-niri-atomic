@@ -1,15 +1,15 @@
 name: fedora-laptop-niri
-description: Minimal Fedora bootc for Intel laptop with Niri + Noctalia
+description: Minimal Fedora Intel laptop with Niri + Noctalia
 base-image: quay.io/fedora/fedora-bootc
 image-version: 44
 
 modules:
   - type: copy
-    src:  config/certs/cosign.pub
+    src:  files/certs/cosign.pub
     dest: /etc/pki/containers/cosign.pub
 
   - type: copy
-    src:  config/containers/registries.d/ghcr.yaml
+    src:  files/containers/registries.d/ghcr.yaml
     dest: /etc/containers/registries.d/ghcr.yaml
 
   - type: signing
@@ -41,6 +41,8 @@ modules:
         - iwlwifi-mvm-firmware
         - alsa-sof-firmware
         - alsa-ucm
+        - tuned
+        - tuned-ppd
 
         - gvfs-mtp
 
