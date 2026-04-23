@@ -20,7 +20,7 @@ jobs:
         with:
           recipe: 'recipe.yml'
           cosign_private_key: ${{ secrets.COSIGN_PRIVATE_KEY }}
-          registry_token: ${{ github.token }}
+          registry_token: ${{ secrets.GH_TOKEN }}
         env:
           COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
 
