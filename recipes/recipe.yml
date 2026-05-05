@@ -19,8 +19,6 @@ modules:
       cleanup: true
       copr:
         - yalter/niri
-        - brycensranch/gpu-screen-recorder-git
-        - clarlok/tools
     install:
       skip-unavailable: true
       packages:
@@ -40,7 +38,8 @@ modules:
         - iwlwifi-mvm-firmware
         - alsa-sof-firmware
         - alsa-ucm
-        - auto-cpufreq
+        - tuned
+        - tuned-ppd
 
         - gvfs-mtp
 
