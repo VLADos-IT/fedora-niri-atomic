@@ -82,8 +82,6 @@ modules:
         - sane-airscan
         - sane-backends
 
-        - sssd
-        - mdadm
         - wpa_supplicant
         - plymouth
         - plymouth-system-theme
