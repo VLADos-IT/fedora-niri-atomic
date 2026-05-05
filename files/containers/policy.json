@@ -6,6 +6,16 @@
 	],
 	"transports": {
 		"docker": {
+			"docker.io": [
+				{
+					"type": "insecureAcceptAnything"
+				}
+			],
+			"registry.fedoraproject.org": [
+				{
+					"type": "insecureAcceptAnything"
+				}
+			],
 			"ghcr.io/vlados-it/fedora-laptop-niri": [
 				{
 					"type": "sigstoreSigned",
@@ -13,6 +23,13 @@
 					"signedIdentity": {
 						"type": "matchRepository"
 					}
+				}
+			]
+		},
+		"containers-storage": {
+			"": [
+				{
+					"type": "insecureAcceptAnything"
 				}
 			]
 		}

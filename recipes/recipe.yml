@@ -20,7 +20,8 @@ modules:
       copr:
         - yalter/niri
         - zhangyi6324/noctalia-shell
-        - brycensranch/gpu-screen-recorder-git
+        - ybrcensranch/gpu-screen-recorder-git
+        - clarlok/tools
     install:
       skip-unavailable: true
       packages:
@@ -33,24 +34,22 @@ modules:
         - neovim
 
         - xdg-desktop-portal
-        - xdg-desktop-portal-gtk
+        - xdg-desktop-portal-wlr
         - greetd
-        - cage
-        - gtkgreet
+        - tuigreet
         
         - iwlwifi-mvm-firmware
         - alsa-sof-firmware
         - alsa-ucm
-        - tuned
-        - tuned-ppd
+        - auto-cpufreq
 
         - gvfs-mtp
 
         - wget
-        - git
+        - git-core
         - mtr
         - rsync
-        - wpa_supplicant
+        - iwd
         - NetworkManager-wifi
 
         - glibc-langpack-en
@@ -64,6 +63,7 @@ modules:
         - firefox
         - firefox-langpacks
         - nano
+        - fuzzel
         - waybar
         - swaybg
         - swayidle
@@ -82,6 +82,9 @@ modules:
         - sane-airscan
         - sane-backends
 
+        - sssd
+        - mdadm
+        - wpa_supplicant
         - plymouth
         - plymouth-system-theme
 
@@ -240,7 +243,7 @@ modules:
         vt = 1
 
         [default_session]
-        command = "cage -ds -m last -- gtkgreet -c niri"
+        command = "tuigreet --cmd 'dbus-run-session niri"
         user = "_greetd"
         EOF
 
@@ -248,4 +251,19 @@ modules:
         cat > /etc/locale.conf <<'EOF'
         LANG=en_US.UTF-8
         LC_CTYPE=en_US.UTF-8
+        EOF
+
+      - |
+        mkdir -p /etc/systemd
+        cat > /etc/systemd/zram-generator.conf <<'EOF'
+        [zram0]
+        zram-size = ram / 2
+        compression-algorithm = zstd
+        EOF
+
+      - |
+        mkdir -p /etc/NetworkManager/conf.d
+        cat > /etc/NetworkManager/conf.d/wifi_backend.conf <<'EOF'
+        [device]
+        wifi.backend=iwd
         EOF
