@@ -20,7 +20,7 @@ modules:
       copr:
         - yalter/niri
         - zhangyi6324/noctalia-shell
-        - ybrcensranch/gpu-screen-recorder-git
+        - brycensranch/gpu-screen-recorder-git
         - clarlok/tools
     install:
       skip-unavailable: true
