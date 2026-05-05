@@ -1,5 +1,5 @@
 name: fedora-laptop-niri
-description: Minimal Fedora Intel laptop with Niri + Noctalia
+description: Minimal Fedora Intel laptop with Niri WM
 base-image: quay.io/fedora/fedora-bootc
 image-version: 44
 
@@ -19,14 +19,13 @@ modules:
       cleanup: true
       copr:
         - yalter/niri
-        - zhangyi6324/noctalia-shell
         - brycensranch/gpu-screen-recorder-git
         - clarlok/tools
     install:
       skip-unavailable: true
       packages:
         - niri
-        - noctalia-shell
+        - mako
         - xwayland-run
         - alacritty
         - nautilus
@@ -241,7 +240,7 @@ modules:
         vt = 1
 
         [default_session]
-        command = "tuigreet --cmd 'dbus-run-session niri"
+        command = "tuigreet --cmd niri"
         user = "_greetd"
         EOF
 
@@ -262,6 +261,8 @@ modules:
       - |
         mkdir -p /etc/NetworkManager/conf.d
         cat > /etc/NetworkManager/conf.d/wifi_backend.conf <<'EOF'
+        [main]
+        auth-polkit=false
         [device]
         wifi.backend=iwd
         EOF
