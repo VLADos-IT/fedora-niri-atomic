@@ -40,6 +40,8 @@ modules:
         - alsa-ucm
         - tuned
         - tuned-ppd
+        - blueman
+        - brightnessctl
 
         - gvfs-mtp
 
@@ -70,6 +72,7 @@ modules:
         - polkit-kde-agent-1
         - polkit-qt6-1
         - nano-default-editor
+        - xdg-desktop-portal-gnome
 
         - cups
         - cups-browsed
