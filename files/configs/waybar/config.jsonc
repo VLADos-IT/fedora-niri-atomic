@@ -1,0 +1,182 @@
+{
+	"layer": "top",
+	"position": "top",
+	"height": 19,
+	"margin-top": 4,
+	"margin-left": 8,
+	"margin-right": 8,
+	"spacing": 4,
+	"modules-left": [
+		"niri/workspaces",
+		"group/performance",
+		"niri/window"
+	],
+	"modules-center": [
+		"clock"
+	],
+	"modules-right": [
+		"tray",
+		"group/controls",
+		"group/system"
+	],
+	"niri/workspaces": {
+		"format": "{icon}",
+		"format-icons": {
+			"active": "",
+			"default": ""
+		}
+	},
+	"niri/window": {
+		"format": "{}",
+		"max-length": 22
+	},
+	"clock": {
+		"format": " {:%d.%m.%Y %H:%M}",
+		"timezone": "UTC",
+		"tooltip-format": "<big>{:%A, %Y-%m-%d}</big>\n<tt><small>{calendar}</small></tt>",
+		"calendar": {
+			"mode": "month",
+			"iso8601": true,
+			"mode-mon-col": 3,
+			"weeks-pos": "right",
+			"on-click-right": "mode",
+			"format": {
+				"months": "<span color='#ffead3'><b>{}</b></span>",
+				"days": "<span color='#ecc6d9'><b>{}</b></span>",
+				"weeks": "<span color='#99ffda'><b>W{}</b></span>",
+				"weekdays": "<span color='#ffcc6d'><b>{}</b></span>",
+				"today": "<span color='#ff6e6e'><b><u>{}</u></b></span>"
+			}
+		}
+	},
+	"group/performance": {
+		"orientation": "horizontal",
+		"spacing": 18,
+		"modules": [
+			"cpu",
+			"memory",
+			"custom/temperature"
+		]
+	},
+	"group/controls": {
+		"orientation": "horizontal",
+		"spacing": 18,
+		"modules": [
+			"custom/brightness",
+			"custom/volume",
+			"custom/mic"
+		]
+	},
+	"group/system": {
+		"orientation": "horizontal",
+		"modules": [
+			"bluetooth",
+			"network",
+			"battery",
+			"custom/power-profile",
+			"custom/vpn",
+			"custom/keepalive"
+		]
+	},
+	"cpu": {
+		"format": " {usage}%"
+	},
+	"memory": {
+		"format": " {percentage}%"
+	},
+	"custom/brightness": {
+		"exec": "$HOME/.config/waybar/scripts/brightness-control.sh status",
+		"on-click": "$HOME/.config/waybar/scripts/brightness-control.sh toggle",
+		"on-scroll-up": "$HOME/.config/waybar/scripts/brightness-control.sh up",
+		"on-scroll-down": "$HOME/.config/waybar/scripts/brightness-control.sh down",
+		"interval": 1,
+		"format": "{}",
+		"return-type": "json"
+	},
+	"custom/volume": {
+		"exec": "$HOME/.config/waybar/scripts/volume-control.sh status",
+		"format": "{}",
+		"on-click": "$HOME/.config/waybar/scripts/volume-control.sh toggle",
+		"on-scroll-up": "$HOME/.config/waybar/scripts/volume-control.sh up",
+		"on-scroll-down": "$HOME/.config/waybar/scripts/volume-control.sh down",
+		"return-type": "json",
+		"signal": 1,
+		"interval": 30
+	},
+	"custom/mic": {
+		"exec": "$HOME/.config/waybar/scripts/mic-control.sh status",
+		"format": "{}",
+		"on-click": "$HOME/.config/waybar/scripts/mic-control.sh toggle",
+		"on-scroll-up": "$HOME/.config/waybar/scripts/mic-control.sh up",
+		"on-scroll-down": "$HOME/.config/waybar/scripts/mic-control.sh down",
+		"return-type": "json",
+		"signal": 2,
+		"interval": 30
+	},
+	"bluetooth": {
+		"format": " {status}",
+		"format-disabled": "󰂲",
+		"format-off": "󰂲",
+		"format-on": "",
+		"format-connected": " {num_connections}",
+		"format-connected-battery": " {device_alias} {device_battery_percentage}%",
+		"tooltip-format": "{controller_alias}\t{controller_address}",
+		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+		"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+		"on-click": "blueman-manager &",
+		"on-click-right": "bluetoothctl show | grep -q 'Powered: yes' && bluetoothctl power off || bluetoothctl power on"
+	},
+	"network": {
+		"format-wifi": "{essid} ",
+		"format-ethernet": "󰈀",
+		"format-disconnected": "󰖪",
+		"format-disabled": "󰖪",
+		"tooltip-format-disabled": "Wi-Fi: disabled",
+		"tooltip-format-wifi": "MAC: {bssid}\nIP: {ipaddr}",
+		"on-click": "sh -c 'nmcli radio wifi on && nmcli dev wifi rescan'",
+		"on-click-right": "nmcli radio wifi | grep -q 'enabled' && nmcli radio wifi off || nmcli radio wifi on"
+	},
+	"battery": {
+		"bat": "BAT0",
+		"adapter": "AC0",
+		"format": "{icon} {capacity}%",
+		"format-time": "{H}h {M}min",
+		"tooltip-format": "Power: {power} W",
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			""
+		]
+	},
+	"custom/power-profile": {
+		"format": "{}",
+		"exec": "$HOME/.config/waybar/scripts/power-profile.sh",
+		"on-click": "$HOME/.config/waybar/scripts/power-profile.sh toggle",
+		"interval": 5,
+		"return-type": "json"
+	},
+	"custom/temperature": {
+		"format": "{}",
+		"exec": "$HOME/.config/waybar/scripts/temperature.sh",
+		"interval": 5,
+		"return-type": "json"
+	},
+	"custom/vpn": {
+		"exec": "~/.config/waybar/scripts/vpn.sh status",
+		"on-click": "~/.config/waybar/scripts/vpn.sh toggle",
+		"return-type": "json",
+		"interval": 3
+	},
+	"custom/keepalive": {
+		"format": "{}",
+		"exec": "$HOME/.config/waybar/scripts/keepalive.sh",
+		"on-click": "$HOME/.config/waybar/scripts/keepalive.sh toggle",
+		"interval": 5,
+		"return-type": "json"
+	},
+	"tray": {
+		"spacing": 5
+	}
+}

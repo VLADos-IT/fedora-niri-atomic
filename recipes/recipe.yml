@@ -12,6 +12,62 @@ modules:
     src:  files/containers/registries.d/ghcr.yaml
     dest: /etc/containers/registries.d/ghcr.yaml
 
+  - type: copy
+    src: files/configs/mako/config
+    dest: /etc/skel/.config/mako/config
+
+  - type: copy
+    src: files/configs/waybar/config.jsonc
+    dest: /etc/skel/.config/waybar/config.jsonc
+
+  - type: copy
+    src: files/configs/waybar/style.css
+    dest: /etc/skel/.config/waybar/style.css
+
+  - type: copy
+    src: files/configs/waybar/scripts/brightness-control.sh
+    dest: /etc/skel/.config/waybar/scripts/brightness-control.sh
+
+  - type: copy
+    src: files/configs/waybar/scripts/keepalive.sh
+    dest: /etc/skel/.config/waybar/scripts/keepalive.sh
+
+  - type: copy
+    src: files/configs/waybar/scripts/mic-control.sh
+    dest: /etc/skel/.config/waybar/scripts/mic-control.sh
+
+  - type: copy
+    src: files/configs/waybar/scripts/power-profile.sh
+    dest: /etc/skel/.config/waybar/scripts/power-profile.sh
+
+  - type: copy
+    src: files/configs/waybar/scripts/temperature.sh
+    dest: /etc/skel/.config/waybar/scripts/temperature.sh
+
+  - type: copy
+    src: files/configs/waybar/scripts/volume-control.sh
+    dest: /etc/skel/.config/waybar/scripts/volume-control.sh
+
+  - type: copy
+    src: files/configs/waybar/scripts/vpn.sh
+    dest: /etc/skel/.config/waybar/scripts/vpn.sh
+
+  - type: copy
+    src: files/configs/niri/config.kdl
+    dest: /etc/skel/.config/niri/config.kdl
+
+  - type: copy
+    src: files/configs/fuzzel/fuzzel.ini
+    dest: /etc/skel/.config/fuzzel/fuzzel.ini
+
+  - type: copy
+    src: files/configs/swaylock/config
+    dest: /etc/skel/.swaylock/config
+
+  - type: copy
+    src: files/scripts/kb-layout-notify.sh
+    dest: /etc/skel/.local/bin/kb-layout-notify.sh
+
   - type: signing
 
   - type: dnf
@@ -26,48 +82,44 @@ modules:
         - mako
         - xwayland-run
         - alacritty
-        - nautilus
-        - flatpak
-        - neovim
+        - waybar
 
         - xdg-desktop-portal
         - xdg-desktop-portal-wlr
+        - xdg-desktop-portal-gtk
         - greetd
         - tuigreet
-        
+
+        - neovim
+        - blueman
+        - tuned
+        - tuned-ppd
+
         - iwlwifi-mvm-firmware
         - alsa-sof-firmware
         - alsa-ucm
-        - tuned
-        - tuned-ppd
-        - blueman
-        - brightnessctl
 
-        - gvfs-mtp
-
-        - wget
-        - git-core
-        - mtr
-        - rsync
         - iwd
         - NetworkManager-wifi
 
         - glibc-langpack-en
         - glibc-langpack-ru
         - google-noto-sans-vf-fonts
-        - google-noto-sans-mono-vf-fonts
-        - google-noto-serif-vf-fonts
         - google-noto-color-emoji-fonts
+
+        - fuzzel
+        - swaybg
+        - swayidle
+        - swaylock
+        - thunar
+        - flatpak
+        - brightnessctl
+
     remove:
       packages:
         - firefox
         - firefox-langpacks
         - nano
-        - fuzzel
-        - waybar
-        - swaybg
-        - swayidle
-        - swaylock
         - polkit-kde
         - polkit-kde-agent-1
         - polkit-qt6-1
@@ -236,13 +288,15 @@ modules:
   - type: script
     snippets:
       - |
+        useradd --system --no-create-home --home-dir /var/lib/greetd --shell /usr/sbin/nologin _greetd || true
+
         mkdir -p /etc/greetd
         cat > /etc/greetd/config.toml <<'EOF'
         [terminal]
         vt = 1
 
         [default_session]
-        command = "tuigreet --cmd niri"
+        command = "tuigreet --cmd niri-session"
         user = "_greetd"
         EOF
 
@@ -268,3 +322,7 @@ modules:
         [device]
         wifi.backend=iwd
         EOF
+
+      - |
+        chmod 755 /etc/skel/.local/bin/kb-layout-notify.sh
+        find /etc/skel/.config/waybar/scripts -type f -name '*.sh' -exec chmod 755 {} +

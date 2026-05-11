@@ -1,0 +1,163 @@
+* {
+    font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", monospace;
+    font-size: 11px;
+    font-weight: 700;
+    border: none;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+}
+
+.modules-left>widget>*,
+.modules-center>widget>*,
+.modules-right>widget>* {
+    background: rgba(23, 25, 30, 0.95);
+    border-radius: 10px;
+    margin: 0 3px;
+    padding: 0 7px;
+}
+
+.modules-right>widget>* {
+    margin: 0 8px;
+    padding: 0 10px;
+}
+
+.modules-center>widget>*,
+.modules-left>widget>* {
+    margin: 0 2px;
+    padding: 0 6px;
+}
+
+#bluetooth,
+#network,
+#custom-temperature,
+#battery,
+#custom-power-profile,
+#custom-theme-switcher,
+#custom-vpn,
+#custom-keepalive {
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+#workspaces {
+    padding: 0 6px;
+}
+
+#workspaces button {
+    min-width: 18px;
+    padding: 0 3px;
+    font-size: 10px;
+    color: #4c566a;
+}
+
+#workspaces button.active {
+    color: #88c0d0;
+}
+
+#custom-brightness,
+#custom-volume {
+    color: #ebcb8b;
+}
+
+#custom-volume.muted {
+    color: #4c566a;
+    text-decoration: line-through;
+}
+
+#custom-volume.zero {
+    color: #7b8798;
+}
+
+#custom-mic {
+    color: #d8dee9;
+}
+
+#custom-mic.muted {
+    color: #4c566a;
+    text-decoration: line-through;
+}
+
+#custom-brightness,
+#custom-volume,
+#custom-mic,
+#cpu,
+#memory,
+#custom-temperature {
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+#cpu {
+    color: #d08770;
+}
+
+#memory {
+    color: #a3be8c;
+}
+
+#custom-temperature.cool {
+    color: #8fbcbb;
+}
+
+#custom-temperature.normal {
+    color: #a3be8c;
+}
+
+#custom-temperature.warm {
+    color: #ebcb8b;
+}
+
+#custom-temperature.hot {
+    color: #bf616a;
+}
+
+#network {
+    color: #8fbcbb;
+}
+
+#bluetooth.connected {
+    color: #a3be8c;
+}
+
+#bluetooth.on {
+    color: #88c0d0;
+}
+
+#bluetooth.off {
+    color: #4c566a;
+}
+
+#battery {
+    color: #a3be8c;
+}
+
+#clock {
+    color: #88c0d0;
+}
+
+#custom-theme-switcher {
+    color: #b48ead;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#custom-keepalive {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#custom-keepalive.active {
+    color: #a3be8c;
+}
+
+#custom-keepalive.inactive {
+    color: #4c566a;
+}
+
+#tray {
+    margin-left: 12px;
+    margin-right: 12px;
+}
